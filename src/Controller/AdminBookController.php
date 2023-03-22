@@ -41,12 +41,12 @@ class AdminBookController extends AbstractController
         //creation d'un formulaire
         $form = $this->createForm(BookType::class);
         // 'app\\form\\BookType'
-        
+        // Je remplie le formulaire avec les données saisie par l'utilisateur
         $form->handleRequest($request);
 
         //je veux test si le formulaire a eteit envoyée
         if($form->isSubmitted() && $form->isValid()){
-            dump('ok');
+            
             // //recupérer les donnée envoyée champs du formulaire
             // $title = $request->request->get('title');
             // $description = $request->request->get('description');
@@ -97,37 +97,50 @@ class AdminBookController extends AbstractController
     public function update( Book $book, Request $request,bookRepository $repository) :Response
     {
 
-    // #[Route('/admin/livres/{id}/modify', name:'app_admin_book_update')]
-    // public function update( int $id, bookRepository $repository, Request $request) :Response
-    // {
-        //recupere la book avec l'id 
-        // $book = $repository->find($id);
+    // // #[Route('/admin/livres/{id}/modify', name:'app_admin_book_update')]
+    // // public function update( int $id, bookRepository $repository, Request $request) :Response
+    // // {
+    //     //recupere la book avec l'id 
+    //     // $book = $repository->find($id);
         
 
-        //tester si le form est envoyé (Request::METHOD_POST)eviter de mal tape
-        if($request->isMethod('POST')){
-             //recupérer les champs du formulaire
-            $title = $request->request->get('title');
-            $description = $request->request->get('description');
-            $genre = $request->request->get('genre');
+    //     //tester si le form est envoyé (Request::METHOD_POST)eviter de mal tape
+    //     if($request->isMethod('POST')){
+    //          //recupérer les champs du formulaire
+    //         $title = $request->request->get('title');
+    //         $description = $request->request->get('description');
+    //         $genre = $request->request->get('genre');
             
 
-        //modify l'objet book avec les champs du form
-            $book 
-            ->setTitle($title)
-            ->setDescription($description)
-            ->setGenre($genre)
-            ->setUpdatedAt( new DateTime());
-            
+    //     //modify l'objet book avec les champs du form
+    //         $book 
+    //         ->setTitle($title)
+    //         ->setDescription($description)
+    //         ->setGenre($genre)
+    //         ->setUpdatedAt( new DateTime());
+        //je crer le formulaire
+        $form = $this->createForm(BookType::class, $book);// before on create vide , mais ici $book permeton recuperer les livres preremplier
+        
+
+        //je remplier le form avec les donnée saisir par user
+        $form->handleRequest($request);
+        //je test le formulaire bien envoyer
+        if($form->isSubmitted() && $form->isValid()){
+            $repository->save($book->setUpdatedAt(new DateTime()), true);
+        //j'enregistre le livre dans BD
+
+        //je redirige vers la liste des livres
+
+        //j'affiche la page de mise a jour d'un livre
 
             //enregistrer les donnée dans la BD  via le repo
-             $repository->save($book, true);
+            
             //redirection vers la liste des books
             return $this->redirectToRoute('app_admin_book_list');
         }
         //(1 etap sur la fin )affichage du form de modify
         return $this->render('admin_book/update.html.twig',[
-             'book' => $book
+             'form' => $$form->createView(),
         ] );
     } 
     
