@@ -41,7 +41,7 @@ class BookType extends AbstractType
         $builder
             ->add('title',TextType::class, ['label' => 'Titre du livre:',])
             ->add('description',TextareaType::class, ['label' => 'Description du livre:',])
-            ->add('genre',ChoiceType::class, [
+            ->add('genre',ChoiceType::class, ['label' => 'genre',
                  'choices' => [
                     'Fantasy' => 'fantasy',
                     'Science Fiction' => 'sci-fi',

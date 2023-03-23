@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Price;
+use App\Entity\PublishingHouse;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Price>
+ * @extends ServiceEntityRepository<PublishingHouse>
  *
- * @method Price|null find($id, $lockMode = null, $lockVersion = null)
- * @method Price|null findOneBy(array $criteria, array $orderBy = null)
- * @method Price[]    findAll()
- * @method Price[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method PublishingHouse|null find($id, $lockMode = null, $lockVersion = null)
+ * @method PublishingHouse|null findOneBy(array $criteria, array $orderBy = null)
+ * @method PublishingHouse[]    findAll()
+ * @method PublishingHouse[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PriceRepository extends ServiceEntityRepository
+class PublishingHouseRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Price::class);
+        parent::__construct($registry, PublishingHouse::class);
     }
 
-    public function save(Price $entity, bool $flush = false): void
+    public function save(PublishingHouse $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class PriceRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Price $entity, bool $flush = false): void
+    public function remove(PublishingHouse $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class PriceRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Price[] Returns an array of Price objects
+//     * @return PublishingHouse[] Returns an array of PublishingHouse objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class PriceRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Price
+//    public function findOneBySomeField($value): ?PublishingHouse
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')

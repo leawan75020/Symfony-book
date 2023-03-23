@@ -5,13 +5,13 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Book;
 use App\Form\BookType;
-use PhpParser\Builder\Method;
+
 use App\Repository\BookRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\Loader\Configurator\form;
+
 /**
  * Controller permettant de gerer les livres de notre app. nous retrouvons 4 routes, la creation, mis a jour, delete, et la listes 
  */
@@ -84,7 +84,7 @@ class AdminBookController extends AbstractController
     }
 
     #[Route('/admin/livres/list', name:'app_admin_book_list')]
-    public function list( bookRepository $repository) :Response
+    public function list( BookRepository $repository) :Response
     {
         //recuperer la liste des book da la BD via le repo
 
@@ -140,15 +140,15 @@ class AdminBookController extends AbstractController
         }
         //(1 etap sur la fin )affichage du form de modify
         return $this->render('admin_book/update.html.twig',[
-             'form' => $$form->createView(),
+             'form' => $form->createView(),
         ] );
     } 
     
     #[Route('/admin/livres/{id}/delete', name:'app_admin_book_remove')]
-    public function remove( int $id, bookRepository $repository) :Response
+    public function remove( Book $book, BookRepository $repository) :Response
     {
         //recupere la book a del selon l'id 
-        $book = $repository->find($id);
+        //$book = $repository->find($id);
 
         //delete la book de la BD via le repo
         $repository->remove($book, true);

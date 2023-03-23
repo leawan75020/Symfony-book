@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %} {% block title %}Admin publishing House - Liste
+des livres {% endblock %} {% block body %}
+
+<h1>Liste des publishing House</h1>
+
+<p>
+  <a href="{{ path('app_admin_publishing_house_create') }}"
+    >Créer un publishing House</a
+  >
+</p>
+
+<ul>
+  {% for publishingHouse in publishingHouses %}
+  <li>
+    {{ publishingHouse.title }}
+    (#{{ publishingHouse.id }})
+    {{ publishingHouse.description }}
+    <a
+      href="{{
+        path('app_admin_publishing_house_update', { id: publishingHouse.id })
+      }}"
+      >Modifier</a
+    >
+    <a
+      href="{{
+        path('app_admin_publishing_house_remove', { id: publishingHouse.id })
+      }}"
+      >Supprimer</a
+    >
+  </li>
+
+  {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %} {% block title %}Admin author - {% block subTitle
+%}Création d'un author {% endblock %} {% endblock %} {% block body %}
+<h1>{% block pageTitle %}Créer un nouveau Auteur {% endblock %}</h1>
+
+<p>
+  <a href="{{ path('app_admin_author_list') }}">Retour</a>
+</p>
+
+{{ form(form) }}{% endblock %}
