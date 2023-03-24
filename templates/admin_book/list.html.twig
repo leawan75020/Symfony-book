@@ -11,7 +11,9 @@ endblock %} {% block body %}
   {% for book in books %}
   <li>
     {{ book.title }}
-    (#{{ book.id }})
+    {% if book.author %} Auteur: {{ book.author.title }} {% endif %} (#{{
+      book.id
+    }})
     {{ book.price }}
     <a href="{{ path('app_admin_book_update', { id: book.id }) }}">Modifier</a>
     <a href="{{ path('app_admin_book_remove', { id: book.id }) }}">Supprimer</a>

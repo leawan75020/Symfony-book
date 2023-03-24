@@ -45,7 +45,7 @@ class AdminAuthorController extends AbstractController
     }
 
     #[Route('/admin/authors/list', name:'app_admin_author_list')]
-    public function list( authorRepository $repository) :Response
+    public function list( AuthorRepository $repository) :Response
     {
         //recuperer la liste des author da la BD via le repo
 

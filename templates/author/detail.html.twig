@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %} {% block title %}Author - Detail d' Author {{ author.title }} {%
+endblock %} {% block body %}
+<p>
+  <a href="{{ path('app_author_list') }}">retour</a>
+</p>
+
+<h1> {{ author.title }}</h1>
+<h2>Description:</h2>
+<p>
+  {{ author.description }}
+</p>
+<h2>Livres:</h2>
+<ul>
+  <li> 
+    {% for book in author.books() %}
+    <li> {{ book.title }}</li>
+    {% endfor %}
+  </li>
+</ul>
+
+{% endblock %}

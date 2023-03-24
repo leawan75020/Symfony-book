@@ -3,9 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Book;
+use App\Entity\Author;
 
+use App\Entity\PublishingHouse;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -52,7 +55,17 @@ class BookType extends AbstractType
                 'placeholder' => 'Choose a genre',
                 'required' => true,
             ])
-            
+
+            ->add('author',EntityType::class, [
+                'label' => 'Auteur du livre:',
+                'class' => Author::class,
+                'choice_label'=>'title'
+            ])
+            ->add('publishingHouse',EntityType::class, [
+                'label' => 'Maison d\'édition du livre:',
+                'class' => PublishingHouse::class,
+                'choice_label' => 'title',
+            ])
             ->add('price',NumberType::class, ['label' => 'Price du livre',])
        
             ->add('submit',SubmitType::class, ['label' =>'Envoyer'])

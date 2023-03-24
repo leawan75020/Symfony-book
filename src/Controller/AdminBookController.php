@@ -119,6 +119,7 @@ class AdminBookController extends AbstractController
     //         ->setGenre($genre)
     //         ->setUpdatedAt( new DateTime());
         //je crer le formulaire
+        $book->getAuthor();
         $form = $this->createForm(BookType::class, $book);// before on create vide , mais ici $book permeton recuperer les livres preremplier
         
 

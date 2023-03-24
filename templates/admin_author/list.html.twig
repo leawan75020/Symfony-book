@@ -1,11 +1,7 @@
 {% extends 'base.html.twig' %} {% block title %}Admin author - Liste des livres
 {% endblock %} {% block body %}
 
-<h1>Liste des livres</h1>
-
-<p>
-  <a href="{{ path('app_admin_author_create') }}">Créer un auteur</a>
-</p>
+<h1>Liste des authors</h1>
 
 <ul>
   {% for author in authors %}
@@ -13,6 +9,10 @@
     {{ author.title }}
     (#{{ author.id }})
     {{ author.nationality }}
+    {% for book in author.getBooks() %}
+    {{ book.title }}
+    {% endfor %}
+
     <a href="{{ path('app_admin_author_update', { id: author.id }) }}"
       >Modifier</a
     >
